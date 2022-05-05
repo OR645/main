@@ -12,8 +12,8 @@ def scan_port(port):
     syn_pkt = sr1(IP(dst=target) / TCP(sport=src_port, dport=port, flags="S"), timeout=0.5, verbose=False)  # SYN request
     try:
         if syn_pkt.haslayer(TCP):
-            if syn_pkt.getlayer(TCP).flags == 0x12:  # equal to SYN-ACK response
-                sr(IP(dst=target) / TCP(sport=src_port, dport=port, flags="R"), timeout=2)  # RST request
+            if syn_pkt.getlayer(TCP).flags == 0x12:  
+                sr(IP(dst=target) / TCP(sport=src_port, dport=port, flags="R"), timeout=2)  
                 return True
         else:
             print(False)
